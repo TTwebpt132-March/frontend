@@ -49,31 +49,21 @@ const inputChange = (name, value) =>{
 
     return (
         <form className = 'login container'>
-        <Login
-      values = {formValues}
-      change = {inputChange}
-      errors = {formErrors}
-      disabled = {disabled}
-      />  
-
-        <div>
-            <div>{errors.email}</div>
-            <div>{errors.password}</div>
-        </div> 
+ 
 
         <div>
         <label>Email&nbsp;
         <input
-        value = {values.email}
-        onChange = {onChange}
+        value = {formValues.email}
+        onChange = {inputChange}
         name = 'email'
         type = 'email'
         />
         </label>
         <label>Password&nbsp;
             <input
-            value = {values.password}
-            onChange = {onChange}
+            value = {formValues.password}
+            onChange = {inputChange}
             name = 'password'
             type = 'password'
             />
