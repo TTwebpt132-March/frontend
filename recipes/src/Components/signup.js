@@ -4,7 +4,9 @@ const Signup = (props) => {
     return (
         <div>
             Signup
+            <p>Hello World from Joe</p>
         </div>
+
     )
 }
 
