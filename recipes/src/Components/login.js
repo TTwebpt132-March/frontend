@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as yup from 'yup';
-
+//structuring my form
 const initialFormValues = {
     email: "",
     password: ""
@@ -10,23 +10,23 @@ const initialFormValues = {
     password: ""
     }
     const initialDisabled = true
+// formSchema for validation
+    const FormSchema = yup.object().shape({
+
+        email: yup.string()
+            .email('Must be a valid email address')
+            .required('Email is required'),
+        password: yup.string()
+            .min(8,'Password must be 8 characters long')
+            .required('Password is required, please fill out.'),   
+    })
 
 const Login = () => {
- 
+ //states
 const [formValues, setFormValues] = useState(initialFormValues)
 const [formErrors, setFormErrors] = useState(initialFormErrors)
 const [disabled, setDisabled] = useState(initialDisabled)
-
-const FormSchema = yup.object().shape({
-
-    email: yup.string()
-        .email('Must be a valid email address')
-        .required('Email is required'),
-    password: yup.string()
-        .min(8,'Password must be 8 characters long')
-        .required('Password is required, please fill out.'),   
-})
-
+//input handlers
 const inputChange = (name, value) =>{
     yup.reach({FormSchema,name})
     .validate(value)
@@ -60,7 +60,7 @@ const inputChange = (name, value) =>{
             <div>{errors.email}</div>
             <div>{errors.password}</div>
         </div> 
-        
+
         <div>
         <label>Email&nbsp;
         <input
