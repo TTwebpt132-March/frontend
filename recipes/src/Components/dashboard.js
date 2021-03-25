@@ -3,7 +3,12 @@ import React from 'react';
 const Dashboard = (props) => {
     return (
         <div>
-            Dashboard
+            <div>
+                <a href=" ">Logout</a>
+            </div>
+            <div>
+                <a href=" ">Enter a New Recipe in Dashboard</a>
+            </div>
         </div>
     )
 }
