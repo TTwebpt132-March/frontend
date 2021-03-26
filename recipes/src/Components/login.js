@@ -1,11 +1,77 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import * as yup from 'yup';
+//structuring my form
+const initialFormValues = {
+    email: "",
+    password: ""
+    }
+    const initialFormErrors = {
+    email: "",
+    password: ""
+    }
+    const initialDisabled = true
+// formSchema for validation
+    const FormSchema = yup.object().shape({
 
-const Login = (props) => {
+        email: yup.string()
+            .email('Must be a valid email address')
+            .required('Email is required'),
+        password: yup.string()
+            .min(8,'Password must be 8 characters long')
+            .required('Password is required, please fill out.'),   
+    })
+
+const Login = () => {
+ //states
+const [formValues, setFormValues] = useState(initialFormValues)
+const [formErrors, setFormErrors] = useState(initialFormErrors)
+const [disabled, setDisabled] = useState(initialDisabled)
+//input handlers
+const inputChange = (name, value) =>{
+    yup.reach({FormSchema,name})
+    .validate(value)
+    .then(()=>{
+      setFormErrors({...formErrors, [name]: ''})
+    })
+    .catch(err=>{
+      setFormErrors({...formErrors, [name]: err.errors[0]})
+    })
+    setFormValues({
+      ...formValues,
+      [name]: value
+    })
+  }
+
+  useEffect(() =>{
+    FormSchema.isValid(formValues).then(valid => setDisabled(!valid))
+  },[formValues])
+  
+
     return (
+        <form className = 'login container'>
+ 
+
         <div>
-            Login
+        <label>Email&nbsp;
+        <input
+        value = {formValues.email}
+        onChange = {inputChange}
+        name = 'email'
+        type = 'email'
+        />
+        </label>
+        <label>Password&nbsp;
+            <input
+            value = {formValues.password}
+            onChange = {inputChange}
+            name = 'password'
+            type = 'password'
+            />
+        </label>
+
+        <button className='loginBtn' disabled={disabled}> Login </button>
         </div>
+        </form>
     )
 }
-
 export default Login;
