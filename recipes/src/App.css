@@ -1,38 +1,85 @@
-.App {
-  text-align: center;
+
+input {
+  margin-bottom: 5px;
+  width: 75%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.recipeForm {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  border: 2px solid blue;
+  width: 75%;
+  padding: 15px;
+}
+
+.ingredients {
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
+  border: 2px solid orange;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.instructions {
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
+  border: 2px solid orange;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.miniCard {
+  border: 1px solid orange;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 250px;
+  margin-bottom: 5px;
+  padding: 10px;
+}
+
+a {
+  text-decoration: none;
+  border: 2px solid orange;
   color: white;
+  background-color: orange;
+  padding: 5px;
 }
 
-.App-link {
-  color: #61dafb;
+.themed-container {
+  display: flex;
+  margin-top: 15px;
+  flex-direction: row;
+  align-items: center;
+  flex-flow: wrap;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.recipeButton, .navButton, a {
+  margin: 2px;
+  color: black;
+  background-color: orange;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
 }
+
+.navigation {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  margin-top: 25px;
+}
+
+.form-container {
+  border: 2px solid orange;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.form-container label {
+  text-align: left;
+}
+
+

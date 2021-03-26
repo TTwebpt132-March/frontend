@@ -1,9 +1,20 @@
 import React from 'react';
+import { Card, CardBody, CardLink, CardTitle, CardSubtitle, CardText, Button } from 'reactstrap';
 
 const MiniCard = (props) => {
     return (
         <div>
-            This is the Mini Recipe Card
+            <Card className="miniCard">
+                <CardBody>
+                    <CardTitle tag="h3">Potato Pie</CardTitle>
+                </CardBody>
+                <CardBody>
+                    <CardText>Grandma's Recipe</CardText>
+                    <CardText>#dinner</CardText>
+                    <Button className="recipeButton">View Recipe</Button>
+                </CardBody>
+            </Card>
+
         </div>
     )
 }
