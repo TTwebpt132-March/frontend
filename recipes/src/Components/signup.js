@@ -20,14 +20,19 @@ const Signup = (props) => {
     const [disabled, setDisabled] = useState(true);
 
     // create a onChange handler for inputs to recognize change going on
+    
+    
+    //    if(/^[a-zA-Z]+$/.test(event.target.value)){          <=== was originally used for names to only input alphabet only (no 1-0) 
+    //                                                              got rid of it because it didn't delete the first letter, and didn't recognize spaces
+    //   }
     const onInputChange = event => {
-    if(/^[a-zA-Z]+$/.test(event.target.value)){
             setFormData({
                 ...formData,
                 [event.target.name]: event.target.value,
             });
         }
-    }
+
+
     useEffect(() => {
         schema.isValid(formData).then(valid => setDisabled(!valid))
     }, [formData])
