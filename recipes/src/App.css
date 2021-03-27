@@ -1,38 +1,87 @@
+h1 {
+  color: aliceblue;
+  text-align: right;
+}
+/* LOGIN FORM  and SIGN UP FORM STYLING*/
+input, button{
+  appearance: none;
+  background: none;
+  border: none;
+  outline: none;
+
+}
+
+.login-container, .signupForm , .recipeForm{
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: coral;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.login-container {
+  position: absolute;
+  top: 25%;
+  right: 25%;
+}
+
+h3{
+  color: aliceblue;
+  font-size: 28px;
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+
+/* Groups similar form fields together*/
+.form-group {
+  display: block;
+  color: #666;
+  width: 300px;
+  margin-bottom: 15px;
+}
+
+ label {
+  display: block;
+  color: aliceblue;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
 
 input {
-  margin-bottom: 5px;
-  width: 75%;
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: aliceblue;
+  border-radius: 8px;
+} 
+
+input:focus {
+  box-shadow: 0px 0px 3px rgba(0,0,0,0.2);
 }
 
-.recipeForm {
-  display: flex;
-  flex-direction: column;
-  border: 2px solid blue;
-  width: 75%;
-  padding: 15px;
+button{
+  display: inline-block;
+  padding: 10px 15px;
+  border-radius: 8px;
+  background-color: coral;
+  color: white;
 }
 
-.ingredients {
-  display: flex;
-  padding: 10px;
-  flex-direction: column;
-  border: 2px solid orange;
-  border-radius: 5px;
-  margin-bottom: 5px;
+.registerLink {
+  margin-top: 5px;
+  display: block;
+  color: white;
+  background-color: coral;
 }
 
-.instructions {
-  display: flex;
-  padding: 10px;
-  flex-direction: column;
-  border: 2px solid orange;
-  border-radius: 5px;
-  margin-bottom: 5px;
-}
-
+/* SIGN UP FORM STYLING*/
 .miniCard {
-  border: 1px solid orange;
+  border: 1px solid aliceblue;
+  background-color: coral;
   border-radius: 5px;
+  color: aliceblue;
   width: 100%;
   max-width: 250px;
   margin-bottom: 5px;
@@ -41,21 +90,21 @@ input {
 
 a {
   text-decoration: none;
-  border: 2px solid orange;
+  border: 2px solid aliceblue;
   color: white;
   background-color: orange;
   padding: 5px;
 }
 
-.themed-container {
+.themed-container, .card-container {
   display: flex;
   margin-top: 15px;
   flex-direction: row;
   align-items: center;
-  flex-flow: wrap;
+  flex-wrap: wrap;
 }
 
-.recipeButton, .navButton, a {
+.recipeButton, .navButton, a, .navigation .search button {
   margin: 2px;
   color: black;
   background-color: orange;
@@ -64,15 +113,24 @@ a {
   padding: 5px;
 }
 
+.dashboard {
+  margin-top: 20px;
+}
+
 .navigation {
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: center;
-  margin-top: 25px;
+  display: inline;
+  padding: 10px;
+  margin: 30px;
+  border: 2px solid red;
+}
+
+.navigation .search {
+  display: inline;
 }
 
 .form-container {
-  border: 2px solid orange;
+  display: flex;
+  flex-direction: column;
   border-radius: 10px;
   width: 100%;
   max-width: 600px;
@@ -80,6 +138,23 @@ a {
 
 .form-container label {
   text-align: left;
+}
+
+.recipeCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.recipeCard .editRecipe {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.editRecipe button {
+  margin: 5px;
 }
 
 

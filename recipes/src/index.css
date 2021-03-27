@@ -5,11 +5,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url(./Assets/pexels-pixabay-461428.jpg);
 }
 
 * {
   margin: 0 auto;
-  background-color: aliceblue;
+  background-size: cover;
 }
 
 code {

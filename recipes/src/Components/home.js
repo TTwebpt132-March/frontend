@@ -1,11 +1,11 @@
 import React from 'react';
-import Signup from './signup.js';
+import Login from './login.js';
+import { Jumbotron, Container } from 'reactstrap';
 
 const Home = (props) => {
     return (
         <div>
-            Grandma's Recipes
-            <Signup />
+            <Login />
         </div>
     )
 }
