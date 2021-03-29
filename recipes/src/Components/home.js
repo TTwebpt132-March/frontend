@@ -1,11 +1,10 @@
 import React from 'react';
-import Signup from './signup.js';
+import Login from './login.js';
 
 const Home = (props) => {
     return (
         <div>
-            Grandma's Recipes
-            <Signup />
+            <Login />
         </div>
     )
 }

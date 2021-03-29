@@ -1,17 +1,26 @@
 import React from 'react';
-import { Card, CardBody, CardLink, CardTitle, CardSubtitle, CardText, Button } from 'reactstrap';
+import { Card, CardBody, CardTitle, CardText, Button } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 const MiniCard = (props) => {
+    const { recipe } = props;
     return (
         <div>
             <Card className="miniCard">
                 <CardBody>
-                    <CardTitle tag="h3">Potato Pie</CardTitle>
+                    <CardTitle tag="h3">{recipe.title}</CardTitle>
                 </CardBody>
                 <CardBody>
-                    <CardText>Grandma's Recipe</CardText>
-                    <CardText>#dinner</CardText>
-                    <Button className="recipeButton">View Recipe</Button>
+                    <CardText>{recipe.source}</CardText>
+                    <CardTitle tag="h5">Categories</CardTitle>
+                    {
+                        recipe.category.map((c, index) => {
+                            return <CardText key={index}>{`# ${c.type}`}</CardText>
+                        })
+                    }
+                    <Link to={`/recipe/${recipe.id}`}>
+                        <Button className="recipeButton">View Recipe</Button>
+                    </Link>
                 </CardBody>
             </Card>
 
