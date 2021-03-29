@@ -1,9 +1,11 @@
 import axios from 'axios';
 
-export const axiosWithAuth = () => {
+const axiosWithAuth = () => {
     const token = localStorage.getItem('authToken');
     return axios.create({
-        baseURL: "https://reqres.in/api/login",
+        baseURL: "https://recipeslambda.herokuapp.com",
         header: { Authorization: token }
     })
 }
+
+export default axiosWithAuth;

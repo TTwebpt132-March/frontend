@@ -14,9 +14,9 @@ const Signup = (props) => {
     //Use State to take all our data in
 
     const initialFormValues = {
-        email: '',
         username: '',
-        password: ''
+        password: '',
+        email: '',
     }
 
     const history = useHistory();
@@ -47,9 +47,13 @@ const Signup = (props) => {
 
     const submit = function (event) {
         event.preventDefault()
+        console.log(formData);
         axios.post("https://recipeslambda.herokuapp.com/api/auth/register", formData)
             .then((res) => {
                 console.log(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
             })
     }
 

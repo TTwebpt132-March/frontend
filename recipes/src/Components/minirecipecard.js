@@ -12,9 +12,14 @@ const MiniCard = (props) => {
                 </CardBody>
                 <CardBody>
                     <CardText>{recipe.source}</CardText>
-                    <CardText>{recipe.category}</CardText>
+                    <CardTitle tag="h5">Categories</CardTitle>
+                    {
+                        recipe.category.map((c, index) => {
+                            return <CardText key={index}>{`# ${c.type}`}</CardText>
+                        })
+                    }
                     <Link to={`/recipe/${recipe.id}`}>
-                        <Button className="recipeButton">View Details</Button>
+                        <Button className="recipeButton">View Recipe</Button>
                     </Link>
                 </CardBody>
             </Card>

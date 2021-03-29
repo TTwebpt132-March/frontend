@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Container } from 'reactstrap';
 import { useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { addRecipe } from '../actions/index.js';
 
 const RecipeForm = (props) => {
     const blankIngredient = {
@@ -8,24 +10,26 @@ const RecipeForm = (props) => {
     }
     const history = useHistory();
 
-    const blankInstruction = {
-        step: '',
+    const blankCategory = {
+        type: '',
     }
 
-    const [form, setForm] = useState({
+    const initialFormValues = {
         title: '',
         source: '',
-        category: '',
         ingredients: [blankIngredient],
-        instructions: [blankInstruction],
-    })
+        category: [blankCategory],
+        instructions: ''
+    }
+
+    const [form, setForm] = useState(initialFormValues)
 
     const addIngredients = () => {
         setForm({ ...form, ingredients: [...form.ingredients, { ...blankIngredient }] })
     }
 
-    const addInstructions = () => {
-        setForm({ ...form, instructions: [...form.instructions, { ...blankInstruction }] })
+    const addCategory = () => {
+        setForm({ ...form, category: [...form.category, { ...blankCategory }] })
     }
 
     const nonDynamicChange = (evt) => {
@@ -33,11 +37,11 @@ const RecipeForm = (props) => {
         setForm({ ...form, [evt.target.name]: evt.target.value })
     }
 
-    const instructionChange = (evt) => {
+    const categoryChange = (evt) => {
         console.log(evt.target.name, evt.target.value)
-        const updatedInstructions = [...form.instructions];
-        updatedInstructions[evt.target.dataset.idx][evt.target.className] = evt.target.value;
-        setForm({ ...form, instructions: updatedInstructions });
+        const updatedCategory = [...form.category];
+        updatedCategory[evt.target.dataset.idx][evt.target.className] = evt.target.value;
+        setForm({ ...form, category: updatedCategory });
     }
 
     const ingredientChange = (evt) => {
@@ -51,17 +55,26 @@ const RecipeForm = (props) => {
         history.push('/dashboard');
     }
 
+    const formSubmit = (evt) => {
+        evt.preventDefault();
+        console.log(form)
+        props.addRecipe(form);
+        setForm(initialFormValues);
+        history.push("/dashboard");
+    }
+
     return (
         <div>
             <Container className="themed-container form-container" fluid={true}>
                 <button className="navButton" onClick={navigateFunction}>Return to Dashboard</button>
-                <form className="recipeForm">
+                <form className="recipeForm" onSubmit={formSubmit}>
                     <h3>Enter Recipe:</h3>
                     <div className="form-group">
                         <label htmlFor="recipeTitle"> Title: </label>
                         <input
                             id="recipeTitle"
                             name="title"
+                            value={form.title}
                             placeholder="Recipe Title"
                             onChange={nonDynamicChange}
                         />
@@ -71,6 +84,7 @@ const RecipeForm = (props) => {
                         <input
                             id="recipeSource"
                             name="source"
+                            value={form.source}
                             placeholder="Ex. Grandma, Mom"
                             onChange={nonDynamicChange}
                         />
@@ -86,6 +100,7 @@ const RecipeForm = (props) => {
                                         type="text"
                                         name={ingredientId}
                                         data-idx={idx}
+                                        value={form.ingredients[idx].name}
                                         id={ingredientId}
                                         placeholder={`Enter Ingredient`}
                                         onChange={ingredientChange}
@@ -97,31 +112,33 @@ const RecipeForm = (props) => {
                     }
                     <input type="button" value="Add Ingredients" onClick={addIngredients} />
                     {
-                        form.instructions.map((val, idx) => {
-                            const instructionId = `name-${idx}`;
+                        form.category.map((val, idx) => {
+                            const categoryId = `name-${idx}`;
                             return (
-                                <div key={`instruction-${idx}`} className="instructions form-group">
-                                    <label htmlFor={instructionId}>{`Instruction #${idx + 1}: `}</label>
+                                <div key={`category-${idx}`} className="categories form-group">
+                                    <label htmlFor={categoryId}>{`Category #${idx + 1}: `}</label>
                                     <input
                                         type="text"
-                                        name={instructionId}
-                                        placeholder={`Enter Instruction`}
+                                        name={categoryId}
+                                        placeholder={`Enter Category`}
                                         data-idx={idx}
-                                        id={instructionId}
-                                        className="step"
-                                        onChange={instructionChange}
+                                        value={form.category[idx].type}
+                                        id={categoryId}
+                                        className="type"
+                                        onChange={categoryChange}
                                     />
                                 </div>
                             )
                         })
                     }
-                    <input type="button" value="Add Instructions" onClick={addInstructions} />
+                    <input type="button" value="Add Categories" onClick={addCategory} />
                     <div className="form-group">
-                        <label htmlFor="recipeCategory"> Category: </label>
+                        <label htmlFor="recipeInstructions"> Instructions: </label>
                         <input
-                            id="recipeCategory"
-                            name="category"
-                            placeholder="dinner, pasta, pizza"
+                            id="recipeInstructions"
+                            name="instructions"
+                            value={form.instructions}
+                            placeholder="input instructions"
                             onChange={nonDynamicChange}
                         />
                     </div>
@@ -132,7 +149,13 @@ const RecipeForm = (props) => {
     );
 }
 
-export default RecipeForm;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addRecipe: (obj) => dispatch(addRecipe(obj))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(RecipeForm);
 
 /*
 RecipeForm should have a title, source (ex Grandma), ingredients, instructions, and category (dinner, chicken, dessert, pasta)

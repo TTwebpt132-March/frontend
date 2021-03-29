@@ -61,7 +61,7 @@ input:focus {
   box-shadow: 0px 0px 3px rgba(0,0,0,0.2);
 }
 
-button{
+button {
   display: inline-block;
   padding: 10px 15px;
   border-radius: 8px;
@@ -85,6 +85,7 @@ button{
   width: 100%;
   max-width: 250px;
   margin-bottom: 5px;
+  height: 200px;
   padding: 10px;
 }
 
@@ -104,8 +105,8 @@ a {
   flex-wrap: wrap;
 }
 
-.recipeButton, .navButton, a, .navigation .search button {
-  margin: 2px;
+button {
+  margin: 10px;
   color: black;
   background-color: orange;
   border: none;
@@ -121,7 +122,6 @@ a {
   display: inline;
   padding: 10px;
   margin: 30px;
-  border: 2px solid red;
 }
 
 .navigation .search {

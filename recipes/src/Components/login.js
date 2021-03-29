@@ -4,11 +4,11 @@ import * as yup from 'yup';
 import axios from 'axios';
 //structuring my form
 const initialFormValues = {
-    email: "",
+    username: "",
     password: ""
 }
 const initialFormErrors = {
-    email: "",
+    username: "",
     password: ""
 }
 
@@ -16,7 +16,7 @@ const initialFormErrors = {
 const initialDisabled = true
 // formSchema for validation
 const validationSchema = yup.object({
-    email: yup.string()
+    username: yup.string()
         .required('username is required'),
     password: yup.string()
         .min(8, 'Password must be 8 characters long')
@@ -52,9 +52,10 @@ const Login = (props) => {
 
     const submit = (evt) => {
         evt.preventDefault();
-        axios.post("https://reqres.in/api/login", formValues)
+        console.log(formValues);
+        axios.post("https://recipeslambda.herokuapp.com/api/auth/login", formValues)
             .then((res) => {
-                console.log(res.data.token);
+                console.log(res);
                 localStorage.setItem('authToken', res.data.token);
                 history.push('/dashboard');
             })
@@ -73,7 +74,7 @@ const Login = (props) => {
                         value={formValues.email}
                         id="username"
                         onChange={change}
-                        name='email'
+                        name='username'
                         type='text'
                     />
                 </div>

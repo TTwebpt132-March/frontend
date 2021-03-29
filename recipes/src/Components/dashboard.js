@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import MiniCard from './minirecipecard.js';
 import { Container } from 'reactstrap';
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Search from "../Components/search.js";
+import axios from 'axios';
+import axiosWithAuth from '../Utils/axiosWithAuth';
 
 const Dashboard = (props) => {
 
@@ -18,6 +20,16 @@ const Dashboard = (props) => {
     const navigateFunction = (evt) => {
         history.push('/form');
     }
+
+    useEffect(() => {
+        axiosWithAuth().get('https://recipeslambda.herokuapp.com/api/recipes')
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }, [])
 
     return (
         <div className="dashboard">

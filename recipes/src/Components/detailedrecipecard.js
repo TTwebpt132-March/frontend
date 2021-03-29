@@ -33,7 +33,12 @@ const DetailedCard = (props) => {
                 </CardBody>
                 <CardBody>
                     <CardText>{`Recipe By: ${relRecipe[0].source}`}</CardText>
-                    <CardText>{relRecipe[0].category}</CardText>
+                    <CardTitle tag="h4">Categories</CardTitle>
+                    {
+                        relRecipe[0].category.map((cat, index) => {
+                            return <CardText key={index}>{cat.type}</CardText>
+                        })
+                    }
                 </CardBody>
             </Card>
             <Card className="miniCard">
@@ -53,15 +58,11 @@ const DetailedCard = (props) => {
                     <CardTitle tag="h3">Instructions</CardTitle>
                 </CardBody>
                 <CardBody>
-                    {
-                        relRecipe[0].instructions.map((instruction, index) => {
-                            return <CardText key={index}>{instruction.step}</CardText>
-                        })
-                    }
+                    <CardText>{relRecipe[0].instructions}</CardText>
                 </CardBody>
             </Card>
             <div className="editRecipe">
-                <button>Edit Recipe</button>
+                <button onClick={() => { history.push(`/edit/${id}`) }}>Edit Recipe</button>
                 <button onClick={() => { props.deleteRecipe(relRecipe[0].id); history.push('/dashboard') }}>Delete Recipe</button>
             </div>
         </div>
