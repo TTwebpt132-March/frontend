@@ -4,10 +4,11 @@ import { Container } from 'reactstrap';
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Search from "../Components/search.js";
-import axios from 'axios';
-import axiosWithAuth from '../Utils/axiosWithAuth';
+import { fetchRecipes } from '../actions/index.js';
 
 const Dashboard = (props) => {
+
+    const { fetchRecipes, recipes, loading } = props;
 
     const history = useHistory();
 
@@ -22,14 +23,12 @@ const Dashboard = (props) => {
     }
 
     useEffect(() => {
-        axiosWithAuth().get('https://recipeslambda.herokuapp.com/api/recipes')
-            .then((res) => {
-                console.log(res);
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-    }, [])
+        fetchRecipes();
+    }, [fetchRecipes])
+
+    if (loading) {
+        return <div>Fetching Recipes....</div>
+    }
 
     return (
         <div className="dashboard">
@@ -39,8 +38,8 @@ const Dashboard = (props) => {
                 <button className="navButton" onClick={logout}>Logout</button>
             </div>
             <Container className="card-container" fluid={true}>
-                {props.recipes.map((recipe) => {
-                    return <MiniCard key={recipe.id} recipe={recipe} />
+                {recipes && recipes.map((recipe, index) => {
+                    return <MiniCard key={index} cardId={index} recipe={recipe} />
                 })}
             </Container>
         </div>
@@ -49,8 +48,16 @@ const Dashboard = (props) => {
 
 const mapStateToProps = (state) => {
     return {
+        loading: state.loading,
         recipes: state.recipes,
+        error: state.error,
     }
 }
 
-export default connect(mapStateToProps, null)(Dashboard);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchRecipes: () => dispatch(fetchRecipes())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

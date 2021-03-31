@@ -10,33 +10,40 @@ const DetailedCard = (props) => {
 
     const history = useHistory();
 
-    const [relRecipe, setRecipe] = useState([]);
+    const [relRecipe, setRecipe] = useState({
+        id: '',
+        title: '',
+        recipe_source: '',
+        recipe_category: [],
+        recipe_ingredients: [],
+        recipe_instructions: ''
+    });
 
     useEffect(() => {
-        setRecipe(props.recipes.filter((recipe) => recipe.id === parseInt(id)));
+        setRecipe(props.recipes[parseInt(id)]);
     }, [id, props.recipes])
 
-    if (relRecipe.length === 0) {
-        return <div>Loading Recipe....</div>
+    if (relRecipe.recipe_category.length === 0) {
+        return <div>Fetching Recipes...</div>
     }
 
     return (
         <div className="recipeCard">
-            {console.log(relRecipe[0])}
+            {console.log(relRecipe)}
             <Link to="/dashboard">
                 <button className="navButton">Return to Dashboard</button>
             </Link>
             <Card className="miniCard">
                 <CardBody>
-                    <CardTitle tag="h3">{relRecipe[0].title}</CardTitle>
-                    <CardTitle tag="h3">{relRecipe[0].id}</CardTitle>
+                    <CardTitle tag="h3">{relRecipe.title}</CardTitle>
+                    <CardTitle tag="h3">{relRecipe.id}</CardTitle>
                 </CardBody>
                 <CardBody>
-                    <CardText>{`Recipe By: ${relRecipe[0].source}`}</CardText>
+                    <CardText>{`Recipe By: ${relRecipe.recipe_source}`}</CardText>
                     <CardTitle tag="h4">Categories</CardTitle>
                     {
-                        relRecipe[0].category.map((cat, index) => {
-                            return <CardText key={index}>{cat.type}</CardText>
+                        relRecipe.recipe_category.map((cat, index) => {
+                            return <CardText key={index}>{cat}</CardText>
                         })
                     }
                 </CardBody>
@@ -47,8 +54,8 @@ const DetailedCard = (props) => {
                 </CardBody>
                 <CardBody>
                     {
-                        relRecipe[0].ingredients.map((ingredient, index) => {
-                            return <CardText key={index}>{ingredient.name}</CardText>
+                        relRecipe.recipe_ingredients.map((ingredient, index) => {
+                            return <CardText key={index}>{ingredient}</CardText>
                         })
                     }
                 </CardBody>
@@ -58,7 +65,7 @@ const DetailedCard = (props) => {
                     <CardTitle tag="h3">Instructions</CardTitle>
                 </CardBody>
                 <CardBody>
-                    <CardText>{relRecipe[0].instructions}</CardText>
+                    <CardText>{relRecipe.recipe_instructions}</CardText>
                 </CardBody>
             </Card>
             <div className="editRecipe">

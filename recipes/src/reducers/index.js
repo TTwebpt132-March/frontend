@@ -12,7 +12,7 @@ import {
 import fakeRecipeData from "../Utils/fakedata";
 
 const initialState = {
-    recipes: [...fakeRecipeData],
+    recipes: [],
     loading: false,
     error: ''
 }

@@ -7,14 +7,6 @@ import { editRecipe } from '../actions/index.js';
 const EditForm = (props) => {
     const history = useHistory();
 
-    const blankIngredient = {
-        name: '',
-    }
-
-    const blankCategory = {
-        type: '',
-    }
-
     const { id } = useParams();
     console.log(id);
 
@@ -36,11 +28,11 @@ const EditForm = (props) => {
     console.log(form);
 
     const addIngredients = () => {
-        setForm({ ...form, ingredients: [...form.ingredients, { ...blankIngredient }] })
+        setForm({ ...form, ingredients: [...form.ingredients, ""] })
     }
 
     const addCategory = () => {
-        setForm({ ...form, category: [...form.category, { ...blankCategory }] })
+        setForm({ ...form, category: [...form.category, ""] })
     }
 
     const nonDynamicChange = (evt) => {
@@ -51,14 +43,14 @@ const EditForm = (props) => {
     const categoryChange = (evt) => {
         console.log(evt.target.name, evt.target.value)
         const updatedCategory = [...form.category];
-        updatedCategory[evt.target.dataset.idx][evt.target.className] = evt.target.value;
+        updatedCategory[evt.target.dataset.idx] = evt.target.value;
         setForm({ ...form, category: updatedCategory });
     }
 
     const ingredientChange = (evt) => {
         console.log(evt.target.name, evt.target.value)
         const updatedIngredients = [...form.ingredients];
-        updatedIngredients[evt.target.dataset.idx][evt.target.className] = evt.target.value;
+        updatedIngredients[evt.target.dataset.idx] = evt.target.value;
         setForm({ ...form, ingredients: updatedIngredients });
     }
 
@@ -67,6 +59,20 @@ const EditForm = (props) => {
         console.log(form)
         props.editRecipe(form);
         history.push('/dashboard');
+    }
+
+    const deleteIngredients = (evt, ind) => {
+        evt.preventDefault();
+        const ingredientList = [...form.ingredients];
+        ingredientList.splice(ind, 1);
+        setForm({ ...form, ingredients: ingredientList });
+    }
+
+    const deleteCategories = (evt, ind) => {
+        evt.preventDefault();
+        const categoryList = [...form.category];
+        categoryList.splice(ind, 1);
+        setForm({ ...form, category: categoryList });
     }
 
     return (
@@ -105,12 +111,13 @@ const EditForm = (props) => {
                                     type="text"
                                     name={ingredientId}
                                     data-idx={idx}
-                                    value={form.ingredients[idx].name}
+                                    value={form.ingredients[idx]}
                                     id={ingredientId}
                                     placeholder={`Enter Ingredient`}
                                     onChange={ingredientChange}
                                     className="name"
                                 />
+                                <button onClick={(evt) => deleteIngredients(evt, idx)}>Delete</button>
                             </div>
                         )
                     })
@@ -127,11 +134,12 @@ const EditForm = (props) => {
                                     name={categoryId}
                                     placeholder={`Enter Category`}
                                     data-idx={idx}
-                                    value={form.category[idx].type}
+                                    value={form.category[idx]}
                                     id={categoryId}
                                     className="type"
                                     onChange={categoryChange}
                                 />
+                                <button onClick={(evt) => deleteCategories(evt, idx)}>Delete</button>
                             </div>
                         )
                     })
@@ -139,7 +147,7 @@ const EditForm = (props) => {
                 <input type="button" value="Add Categories" onClick={addCategory} />
                 <div className="form-group">
                     <label htmlFor="recipeInstructions"> Instructions: </label>
-                    <input
+                    <textarea
                         id="recipeInstructions"
                         name="instructions"
                         value={form.instructions}

@@ -3,26 +3,26 @@ const fakeRecipeData = [
         id: 1,
         title: 'Swedish',
         source: 'Grandma',
-        category: [{ type: 'dinner' }, { type: 'tea' }],
-        ingredients: [{ name: 'Beef' }, { name: 'Noodles' }, { name: 'Eggs' }],
+        category: ['dinner', 'tea'],
+        ingredients: ['Beef', 'Noodles', 'Eggs'],
         instructions: 'Mix Beef, Noodles and Eggs'
     },
     {
         id: 2,
-        title: 'Meat',
+        title: 'Swedish',
         source: 'Grandma',
-        category: [{ type: 'lunch' }, { type: 'dinner' }],
-        ingredients: [{ name: 'Beef' }, { name: 'Noodles' }, { name: 'Eggs' }],
+        category: ['dinner', 'tea'],
+        ingredients: ['Beef', 'Noodles', 'Eggs'],
         instructions: 'Mix Beef, Noodles and Eggs'
     },
     {
         id: 3,
-        title: 'Pie',
+        title: 'Swedish',
         source: 'Grandma',
-        category: [{ type: 'snack' }],
-        ingredients: [{ name: 'Beef' }, { name: 'Noodles' }, { name: 'Eggs' }],
+        category: ['dinner', 'tea'],
+        ingredients: ['Beef', 'Noodles', 'Eggs'],
         instructions: 'Mix Beef, Noodles and Eggs'
-    }
+    },
 ]
 
 
