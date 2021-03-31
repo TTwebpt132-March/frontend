@@ -11,10 +11,10 @@ const MiniCard = (props) => {
                     <CardTitle tag="h3">{recipe.title}</CardTitle>
                 </CardBody>
                 <CardBody>
-                    <CardText>{recipe.source}</CardText>
+                    <CardText>{recipe.recipe_source}</CardText>
                     <CardTitle tag="h5">Categories</CardTitle>
                     {
-                        recipe.category && recipe.category.map((c, index) => {
+                        recipe.recipe_category && recipe.recipe_category.map((c, index) => {
                             return <CardText key={index}>{`# ${c}`}</CardText>
                         })
                     }

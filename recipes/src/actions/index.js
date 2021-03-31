@@ -24,10 +24,6 @@ export const searchRecipe = (searchTerm) => {
     return { type: SEARCH_RECIPE, payload: searchTerm };
 }
 
-export const deleteRecipe = (recipeId) => {
-    return { type: DELETE_RECIPE, payload: recipeId };
-}
-
 export const editRecipe = (editedObj) => {
     return { type: EDIT_RECIPE, payload: editedObj };
 }
@@ -44,16 +40,28 @@ if (token) {
     console.log(decoded);
 }
 
-export const fetchRecipes = () => (dispatch) => {
+export const fetchRecipes = (id) => (dispatch) => {
     dispatch({ type: FETCH_REQUEST_PROGRESS })
-    axiosWithAuth().get(`/api/users/${decoded.userID}/recipes`)
+
+    axiosWithAuth().get(`/api/users/${id}/recipes`)
         .then((res) => {
-            console.log(res.data);
+            console.log(res);
             dispatch({ type: FETCH_REQUEST_SUCCESS, payload: res.data.recipes })
         })
         .catch((err) => {
             console.log(err.message);
             dispatch({ type: FETCH_REQUEST_FAILURE, payload: err.message })
+        })
+}
+
+export const deleteRecipe = (id) => (dispatch) => {
+    axiosWithAuth().delete(`/api/recipes/${id}`)
+        .then((res) => {
+            console.log(res);
+        })
+        .catch((err) => {
+            console.log(err.message);
+            dispatch({ type: FETCH_REQUEST_FAILURE, payload: err.message });
         })
 }
 

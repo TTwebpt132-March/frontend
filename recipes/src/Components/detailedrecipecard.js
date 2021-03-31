@@ -70,7 +70,7 @@ const DetailedCard = (props) => {
             </Card>
             <div className="editRecipe">
                 <button onClick={() => { history.push(`/edit/${id}`) }}>Edit Recipe</button>
-                <button onClick={() => { props.deleteRecipe(relRecipe[0].id); history.push('/dashboard') }}>Delete Recipe</button>
+                <button onClick={() => { props.deleteRecipe(relRecipe.id); history.push('/dashboard') }}>Delete Recipe</button>
             </div>
         </div>
     )

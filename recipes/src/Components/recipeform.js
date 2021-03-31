@@ -61,7 +61,6 @@ const RecipeForm = (props) => {
     }
 
     const formSubmit = (evt) => {
-        ///api//recipes
         evt.preventDefault();
         console.log(form)
 

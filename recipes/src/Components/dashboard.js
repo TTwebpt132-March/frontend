@@ -5,10 +5,18 @@ import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Search from "../Components/search.js";
 import { fetchRecipes } from '../actions/index.js';
+import jwt_decode from 'jwt-decode';
 
 const Dashboard = (props) => {
 
     const { fetchRecipes, recipes, loading } = props;
+
+    let decoded = ""
+    let token = localStorage.getItem('authToken');
+    if (token) {
+        decoded = jwt_decode(token);
+        console.log(decoded);
+    }
 
     const history = useHistory();
 
@@ -23,8 +31,8 @@ const Dashboard = (props) => {
     }
 
     useEffect(() => {
-        fetchRecipes();
-    }, [fetchRecipes])
+        fetchRecipes(decoded.userID);
+    }, [fetchRecipes, decoded.userID])
 
     if (loading) {
         return <div>Fetching Recipes....</div>
@@ -56,7 +64,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchRecipes: () => dispatch(fetchRecipes())
+        fetchRecipes: (id) => dispatch(fetchRecipes(id))
     }
 }
 
