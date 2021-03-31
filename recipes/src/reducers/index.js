@@ -12,7 +12,7 @@ import {
 import fakeRecipeData from "../Utils/fakedata";
 
 const initialState = {
-    recipes: [...fakeRecipeData],
+    recipes: [],
     loading: false,
     error: ''
 }
@@ -27,8 +27,6 @@ const reducer = (state = initialState, action) => {
             return { ...state, loading: false, error: action.payload }
         case ADD_NEW_RECIPE:
             return { ...state, loading: false, error: '', recipes: [...state.recipes, action.payload] }
-        case DELETE_RECIPE:
-            return { ...state, loading: false, recipes: state.recipes.filter((recipe) => recipe.id !== action.payload) }
         case EDIT_RECIPE: {
             const index = state.recipes.findIndex((recipe) => recipe.id === action.payload.id);
             const newArray = [...state.recipes];

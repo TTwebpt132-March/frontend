@@ -3,33 +3,38 @@ import { Container } from 'reactstrap';
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addRecipe } from '../actions/index.js';
+import axiosWithAuth from '../Utils/axiosWithAuth.js';
+import jwt_decode from 'jwt-decode';
 
 const RecipeForm = (props) => {
-    const blankIngredient = {
-        name: '',
-    }
     const history = useHistory();
-
-    const blankCategory = {
-        type: '',
-    }
 
     const initialFormValues = {
         title: '',
         source: '',
-        ingredients: [blankIngredient],
-        category: [blankCategory],
+        ingredients: [],
+        category: [],
         instructions: ''
     }
 
-    const [form, setForm] = useState(initialFormValues)
-
-    const addIngredients = () => {
-        setForm({ ...form, ingredients: [...form.ingredients, { ...blankIngredient }] })
+    let decoded = " "
+    let token = localStorage.getItem('authToken');
+    if (token) {
+        decoded = jwt_decode(token);
+        console.log(decoded);
     }
 
-    const addCategory = () => {
-        setForm({ ...form, category: [...form.category, { ...blankCategory }] })
+
+    const [form, setForm] = useState(initialFormValues)
+
+    const addIngredients = (evt) => {
+        evt.preventDefault();
+        setForm({ ...form, ingredients: [...form.ingredients, ""] })
+    }
+
+    const addCategory = (evt) => {
+        evt.preventDefault();
+        setForm({ ...form, category: [...form.category, ""] })
     }
 
     const nonDynamicChange = (evt) => {
@@ -40,14 +45,14 @@ const RecipeForm = (props) => {
     const categoryChange = (evt) => {
         console.log(evt.target.name, evt.target.value)
         const updatedCategory = [...form.category];
-        updatedCategory[evt.target.dataset.idx][evt.target.className] = evt.target.value;
+        updatedCategory[evt.target.dataset.idx] = evt.target.value;
         setForm({ ...form, category: updatedCategory });
     }
 
     const ingredientChange = (evt) => {
         console.log(evt.target.name, evt.target.value)
         const updatedIngredients = [...form.ingredients];
-        updatedIngredients[evt.target.dataset.idx][evt.target.className] = evt.target.value;
+        updatedIngredients[evt.target.dataset.idx] = evt.target.value;
         setForm({ ...form, ingredients: updatedIngredients });
     }
 
@@ -58,9 +63,29 @@ const RecipeForm = (props) => {
     const formSubmit = (evt) => {
         evt.preventDefault();
         console.log(form)
-        props.addRecipe(form);
+
+        axiosWithAuth().post(`/api/recipes`, { ...form, user_id: decoded.userID })
+            .then((res) => {
+                console.log(res.data);
+            }).catch((err) => {
+                console.log(err.message);
+            })
         setForm(initialFormValues);
         history.push("/dashboard");
+    }
+
+    const deleteIngredients = (evt, ind) => {
+        evt.preventDefault();
+        const ingredientList = [...form.ingredients];
+        ingredientList.splice(ind, 1);
+        setForm({ ...form, ingredients: ingredientList });
+    }
+
+    const deleteCategories = (evt, ind) => {
+        evt.preventDefault();
+        const categoryList = [...form.category];
+        categoryList.splice(ind, 1);
+        setForm({ ...form, category: categoryList });
     }
 
     return (
@@ -100,17 +125,18 @@ const RecipeForm = (props) => {
                                         type="text"
                                         name={ingredientId}
                                         data-idx={idx}
-                                        value={form.ingredients[idx].name}
+                                        value={form.ingredients[idx]}
                                         id={ingredientId}
                                         placeholder={`Enter Ingredient`}
                                         onChange={ingredientChange}
                                         className="name"
                                     />
+                                    <button onClick={(evt) => deleteIngredients(evt, idx)}>Delete</button>
                                 </div>
                             )
                         })
                     }
-                    <input type="button" value="Add Ingredients" onClick={addIngredients} />
+                    <button onClick={addIngredients} >Add Ingredients</button>
                     {
                         form.category.map((val, idx) => {
                             const categoryId = `name-${idx}`;
@@ -122,23 +148,24 @@ const RecipeForm = (props) => {
                                         name={categoryId}
                                         placeholder={`Enter Category`}
                                         data-idx={idx}
-                                        value={form.category[idx].type}
+                                        value={form.category[idx]}
                                         id={categoryId}
                                         className="type"
                                         onChange={categoryChange}
                                     />
+                                    <button onClick={(evt) => deleteCategories(evt, idx)}>Delete</button>
                                 </div>
                             )
                         })
                     }
-                    <input type="button" value="Add Categories" onClick={addCategory} />
+                    <button onClick={addCategory} >Add Categories</button>
                     <div className="form-group">
                         <label htmlFor="recipeInstructions"> Instructions: </label>
-                        <input
+                        <textarea
                             id="recipeInstructions"
                             name="instructions"
                             value={form.instructions}
-                            placeholder="input instructions"
+                            placeholder="Instructions"
                             onChange={nonDynamicChange}
                         />
                     </div>

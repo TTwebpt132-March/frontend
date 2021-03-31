@@ -3,13 +3,29 @@ h1 {
   text-align: right;
 }
 /* LOGIN FORM  and SIGN UP FORM STYLING*/
-input, button{
+input, button {
   appearance: none;
   background: none;
   border: none;
   outline: none;
 
 }
+
+button {
+  margin: 10px;
+  color: black;
+  background-color: orange;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+textarea {
+  height: 150px;
+  border-radius: 5px;
+  border: none;
+}
+
 
 .login-container, .signupForm , .recipeForm{
   max-width: 400px;
@@ -61,14 +77,6 @@ input:focus {
   box-shadow: 0px 0px 3px rgba(0,0,0,0.2);
 }
 
-button {
-  display: inline-block;
-  padding: 10px 15px;
-  border-radius: 8px;
-  background-color: coral;
-  color: white;
-}
-
 .registerLink {
   margin-top: 5px;
   display: block;
@@ -83,7 +91,7 @@ button {
   border-radius: 5px;
   color: aliceblue;
   width: 100%;
-  max-width: 250px;
+  max-width: 300px;
   margin-bottom: 5px;
   height: 200px;
   padding: 10px;
@@ -105,14 +113,7 @@ a {
   flex-wrap: wrap;
 }
 
-button {
-  margin: 10px;
-  color: black;
-  background-color: orange;
-  border: none;
-  border-radius: 5px;
-  padding: 5px;
-}
+
 
 .dashboard {
   margin-top: 20px;

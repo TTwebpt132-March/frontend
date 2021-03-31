@@ -3,7 +3,7 @@ import { Card, CardBody, CardTitle, CardText, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 const MiniCard = (props) => {
-    const { recipe } = props;
+    const { recipe, cardId } = props;
     return (
         <div>
             <Card className="miniCard">
@@ -11,14 +11,14 @@ const MiniCard = (props) => {
                     <CardTitle tag="h3">{recipe.title}</CardTitle>
                 </CardBody>
                 <CardBody>
-                    <CardText>{recipe.source}</CardText>
+                    <CardText>{recipe.recipe_source}</CardText>
                     <CardTitle tag="h5">Categories</CardTitle>
                     {
-                        recipe.category.map((c, index) => {
-                            return <CardText key={index}>{`# ${c.type}`}</CardText>
+                        recipe.recipe_category && recipe.recipe_category.map((c, index) => {
+                            return <CardText key={index}>{`# ${c}`}</CardText>
                         })
                     }
-                    <Link to={`/recipe/${recipe.id}`}>
+                    <Link to={`/recipe/${cardId}`}>
                         <Button className="recipeButton">View Recipe</Button>
                     </Link>
                 </CardBody>
