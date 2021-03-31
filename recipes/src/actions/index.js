@@ -24,10 +24,6 @@ export const searchRecipe = (searchTerm) => {
     return { type: SEARCH_RECIPE, payload: searchTerm };
 }
 
-export const editRecipe = (editedObj) => {
-    return { type: EDIT_RECIPE, payload: editedObj };
-}
-
 export const setError = (errorMessage) => {
     return { type: SET_ERROR_MESSAGE, payload: errorMessage };
 }
@@ -56,6 +52,20 @@ export const fetchRecipes = (id) => (dispatch) => {
 
 export const deleteRecipe = (id) => (dispatch) => {
     axiosWithAuth().delete(`/api/recipes/${id}`)
+        .then((res) => {
+            console.log(res);
+        })
+        .catch((err) => {
+            console.log(err.message);
+            dispatch({ type: FETCH_REQUEST_FAILURE, payload: err.message });
+        })
+}
+
+export const updateRecipe = (id, newObj, user_id) => (dispatch) => {
+    axiosWithAuth().put(`/api/recipes/${id}`, {
+        user_id: user_id, title: newObj.title, source: newObj.recipe_source, ingredients: newObj.recipe_ingredients,
+        category: newObj.recipe_category, instructions: newObj.recipe_instructions
+    })
         .then((res) => {
             console.log(res);
         })
