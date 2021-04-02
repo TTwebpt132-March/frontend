@@ -64,7 +64,9 @@ const RecipeForm = (props) => {
         console.log(form)
         props.addRecipe(form, decoded.userID);
         setForm(initialFormValues);
-        history.push("/dashboard");
+        setTimeout(() => {
+            history.push('/dashboard');
+        }, 200);
     }
 
     const deleteIngredients = (evt, ind) => {

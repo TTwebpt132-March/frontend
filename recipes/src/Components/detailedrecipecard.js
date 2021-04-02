@@ -22,7 +22,9 @@ const DetailedCard = (props) => {
     const deleteRecipe = (e) => {
         e.preventDefault();
         props.deleteRecipe(relRecipe.id);
-        history.push('/dashboard')
+        setTimeout(() => {
+            history.push('/dashboard');
+        }, 200);
     }
 
 
