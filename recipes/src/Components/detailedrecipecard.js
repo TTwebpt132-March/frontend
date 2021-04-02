@@ -19,6 +19,13 @@ const DetailedCard = (props) => {
         recipe_instructions: ''
     });
 
+    const deleteRecipe = (e) => {
+        e.preventDefault();
+        props.deleteRecipe(relRecipe.id);
+        history.push('/dashboard')
+    }
+
+
     useEffect(() => {
         setRecipe(props.recipes[parseInt(id)]);
     }, [id, props.recipes])
@@ -70,7 +77,7 @@ const DetailedCard = (props) => {
             </Card>
             <div className="editRecipe">
                 <button onClick={() => { history.push(`/edit/${id}`) }}>Edit Recipe</button>
-                <button onClick={() => { props.deleteRecipe(relRecipe.id); history.push('/dashboard') }}>Delete Recipe</button>
+                <button onClick={deleteRecipe}>Delete Recipe</button>
             </div>
         </div>
     )
