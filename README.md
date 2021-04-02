@@ -1,64 +1,70 @@
-# 👀 Product Vision Document
+# Getting Started with Create React App
 
-This is the template for the Product Vision Document that teams complete after their initial icebreaker. The PVD is crucial to the planning phase and is mandatory for all groups to complete before starting their project.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-# ☝️ Proposal
+## Available Scripts
 
-### What problem does your app solve?
-Creates a collection of Family Recipes. We can find those recipes too.
-Be as specific as possible; how does your app solve the problem?
-Our app will allow a user to login and create a new recipe as well as search for other recipes created by other users.
-### What is the mission statement?
-We want to store your family recipes so they stand the test of time.
+In the project directory, you can run:
 
-# 💡 Features
+### `npm start`
 
-### What features are required for your minimum viable product?
-On-boarding process for a new user
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-Ability to enter a new recipe, including title, source (ex: Grandma Ethel), ingredients, instructions, and category (dinner, chicken, dessert, pasta, etc) and edit or delete it later.
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
 
+### `npm test`
 
-Dashboard to view all entered recipes.
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
+### `npm run build`
 
-Ability to search for recipes by title or tagged categories.
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-### What features may you wish to put in a future release?
-Ability to upload a picture of the original recipe along with the recipe entry.
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-By default all recipes uploaded can only be viewed by the user logged in. A stretch goal would add the ability to invite another user with the link to view the recipe.
+### `npm run eject`
 
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-### What do the top 3 similar apps do for their users?
-AllRecipies.com - allows the public to view all recipes.
-BonApetete.com - also features video, and additional cooking resources.
-Pinterest - also used as an inspiration hub for other media, crafts, and home projects. 
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-# 🛠 Frameworks - Libraries
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-### What 3rd party frameworks/libraries are you considering using?
-Knex, cors, helmet, dotenv, express, bcrypt, jwt, nodemon, material-ui, reactstrap, react-redux, redux, styled-components, bootstrap, react-routing, axios, yup, react-router-dom
-### Do the APIs you need require you to contact them to gain access?
-no
-### Are you required to pay to use said API(s)?
-no
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-# 🎯 Target Audience
+## Learn More
 
-### Who is your target audience? Be specific.
-Families, home chefs, fitness enthusiasts, legacy savers, 
-### What feedback have you gotten from potential users?
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-none
-### Have you validated this problem and your solution with a target audience? Describe how.
-	no
+To learn React, check out the [React documentation](https://reactjs.org/).
 
+### Code Splitting
 
-# 🔑 Prototype Key Feature(s)
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### How long do you think it will take to implement these features?
-Less than two weeks
-### Do you anticipate working on stretch functionality after completion of a Minimal Viable Product?
-Possibly.
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
