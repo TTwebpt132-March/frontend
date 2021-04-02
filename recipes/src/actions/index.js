@@ -1,4 +1,3 @@
-import axios from 'axios';
 import axiosWithAuth from '../Utils/axiosWithAuth.js';
 import jwt_decode from 'jwt-decode';
 
@@ -11,10 +10,7 @@ export const EDIT_RECIPE = "EDIT_RECIPE";
 export const DELETE_RECIPE = "DELETE_RECIPE";
 export const SEARCH_RECIPE = "SEARCH_RECIPE";
 export const CLEAR_SEARCH = "CLEAR_SEARCH";
-
-export const addRecipe = (recipeObj) => {
-    return { type: ADD_NEW_RECIPE, payload: { ...recipeObj } };
-}
+export const EMPTY_STATE = "EMPTY_STATE";
 
 export const clearSearch = () => {
     return { type: CLEAR_SEARCH };
@@ -26,6 +22,10 @@ export const searchRecipe = (searchTerm) => {
 
 export const setError = (errorMessage) => {
     return { type: SET_ERROR_MESSAGE, payload: errorMessage };
+}
+
+export const emptyState = () => {
+    return { type: EMPTY_STATE };
 }
 
 //This helps us decode the token
@@ -50,10 +50,12 @@ export const fetchRecipes = (id) => (dispatch) => {
         })
 }
 
+
 export const deleteRecipe = (id) => (dispatch) => {
     axiosWithAuth().delete(`/api/recipes/${id}`)
         .then((res) => {
             console.log(res);
+            fetchRecipes(decoded.userID);
         })
         .catch((err) => {
             console.log(err.message);
@@ -68,8 +70,19 @@ export const updateRecipe = (id, newObj, user_id) => (dispatch) => {
     })
         .then((res) => {
             console.log(res);
+            fetchRecipes(decoded.userID);
         })
         .catch((err) => {
+            console.log(err.message);
+            dispatch({ type: FETCH_REQUEST_FAILURE, payload: err.message });
+        })
+}
+
+export const addRecipe = (recipeObj, userID) => (dispatch) => {
+    axiosWithAuth().post(`/api/recipes`, { ...recipeObj, user_id: userID })
+        .then((res) => {
+            console.log(res.data);
+        }).catch((err) => {
             console.log(err.message);
             dispatch({ type: FETCH_REQUEST_FAILURE, payload: err.message });
         })

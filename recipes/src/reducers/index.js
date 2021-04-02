@@ -2,14 +2,10 @@ import {
     FETCH_REQUEST_PROGRESS,
     FETCH_REQUEST_SUCCESS,
     FETCH_REQUEST_FAILURE,
-    ADD_NEW_RECIPE,
-    DELETE_RECIPE,
     SET_ERROR_MESSAGE,
     SEARCH_RECIPE,
-    CLEAR_SEARCH,
-    EDIT_RECIPE
+    EMPTY_STATE
 } from '../actions/index.js';
-import fakeRecipeData from "../Utils/fakedata";
 
 const initialState = {
     recipes: [],
@@ -25,8 +21,12 @@ const reducer = (state = initialState, action) => {
             return { ...state, loading: false, recipes: action.payload, error: '' }
         case FETCH_REQUEST_FAILURE:
             return { ...state, loading: false, error: action.payload }
+        /*
         case ADD_NEW_RECIPE:
             return { ...state, loading: false, error: '', recipes: [...state.recipes, action.payload] }
+        */
+
+        /*
         case EDIT_RECIPE: {
             const index = state.recipes.findIndex((recipe) => recipe.id === action.payload.id);
             const newArray = [...state.recipes];
@@ -35,18 +35,26 @@ const reducer = (state = initialState, action) => {
                 ...state, recipes: newArray,
             }
         }
+        */
         case SET_ERROR_MESSAGE:
             return { ...state, loading: false, error: action.payload }
         case SEARCH_RECIPE:
             return {
                 ...state, loading: false,
                 recipes: state.recipes.filter((recipe) => {
-                    return (recipe.category.filter((cat) => cat.type.toLowerCase() === action.payload.toLowerCase())).length > 0 ? recipe : '';
+                    const lowSearch = action.payload.toLowerCase();
+                    const lowCategory = recipe.recipe_category.map((cat) => cat.toLowerCase());
+                    const lowTitle = recipe.title.toLowerCase();
+                    return (lowCategory.includes(lowSearch)) || (lowTitle.includes(lowSearch));
                 })
             }
         /*recipe.title.toLowerCase() === action.payload.toLowerCase() */
+        /*
         case CLEAR_SEARCH:
             return { ...state, loading: false, recipes: [...fakeRecipeData] };
+        */
+        case EMPTY_STATE:
+            return { ...state, loading: true, recipes: [] };
         default:
             return state;
     }

@@ -157,7 +157,7 @@ const EditForm = (props) => {
                     <label htmlFor="recipeInstructions"> Instructions: </label>
                     <textarea
                         id="recipeInstructions"
-                        name="instructions"
+                        name="recipe_instructions"
                         value={form.recipe_instructions}
                         placeholder="input instructions"
                         onChange={nonDynamicChange}

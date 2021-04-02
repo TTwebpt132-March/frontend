@@ -3,7 +3,6 @@ import { Container } from 'reactstrap';
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addRecipe } from '../actions/index.js';
-import axiosWithAuth from '../Utils/axiosWithAuth.js';
 import jwt_decode from 'jwt-decode';
 
 const RecipeForm = (props) => {
@@ -63,13 +62,7 @@ const RecipeForm = (props) => {
     const formSubmit = (evt) => {
         evt.preventDefault();
         console.log(form)
-
-        axiosWithAuth().post(`/api/recipes`, { ...form, user_id: decoded.userID })
-            .then((res) => {
-                console.log(res.data);
-            }).catch((err) => {
-                console.log(err.message);
-            })
+        props.addRecipe(form, decoded.userID);
         setForm(initialFormValues);
         history.push("/dashboard");
     }
@@ -178,7 +171,7 @@ const RecipeForm = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addRecipe: (obj) => dispatch(addRecipe(obj))
+        addRecipe: (obj, userID) => dispatch(addRecipe(obj, userID))
     }
 }
 
