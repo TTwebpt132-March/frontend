@@ -46,7 +46,6 @@ textarea {
 
 h3{
   color: aliceblue;
-  font-size: 28px;
   font-weight: 500;
   margin-bottom: 30px;
 }
@@ -91,7 +90,7 @@ input:focus {
   border-radius: 5px;
   color: aliceblue;
   width: 100%;
-  max-width: 300px;
+  max-width: 200px;
   margin-bottom: 5px;
   height: 200px;
   padding: 10px;
@@ -107,6 +106,7 @@ a {
 
 .themed-container, .card-container {
   display: flex;
+  overflow: hidden;
   margin-top: 15px;
   flex-direction: row;
   align-items: center;
@@ -117,7 +117,7 @@ a {
 
 
 .dashboard {
-  margin-top: 20px;
+  margin: 10px 10px;
 }
 
 .navigation {
