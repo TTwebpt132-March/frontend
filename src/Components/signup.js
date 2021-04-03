@@ -26,6 +26,14 @@ const Signup = (props) => {
     const [errors, setErrors] = useState({ email: '', username: '', password: '' })
     const [disabled, setDisabled] = useState(true);
 
+    const setFormErrors = (name, value) => {
+        yup.reach(schema, name).validate(value)
+            .then(() => setErrors({ ...errors, [name]: '' }))
+            .catch(err => {
+                setErrors({ ...errors, [name]: err.errors })
+            })
+    }
+
     // create a onChange handler for inputs to recognize change going on
 
 
@@ -34,6 +42,7 @@ const Signup = (props) => {
     //   }
     const onInputChange = event => {
         console.log(event.target.name, event.target.value)
+        setFormErrors(event.target.name, event.target.value);
         setFormData({
             ...formData,
             [event.target.name]: event.target.value,
@@ -75,7 +84,7 @@ const Signup = (props) => {
                     <label htmlFor="password"> Password: </label>
                     <input placeholder="Password1234" type="text" name="password" id="password" onChange={onInputChange} />
                 </div>
-                <button>Submit</button>
+                <button disabled={disabled}>Submit</button>
             </form>
         </div>
     )
